@@ -1,0 +1,161 @@
+================================================================================
+JasperServer Integration Notes - CFP Module
+================================================================================
+
+Date: March 5, 2026
+
+WHAT THIS DOES:
+Connects the CFP module to JasperServer so users can generate Certificate of
+Full Payment reports. Hit the button, get a PDF in a new tab. Pretty simple.
+
+
+================================================================================
+Files Changed
+================================================================================
+
+Backend:
+--------
+- app/Http/Controllers/MasterSetup/CertificateofFullpaymentController.php
+  Added generateFromJasperServer() method
+  - Connects to JasperServer REST API
+  - Report path: /Document_report/CFP
+  - Returns PDF inline (opens in browser)
+  - Logs to 'cfp' channel for debugging
+
+- routes/masterSetup.php
+  New route: /certificate-of-full-payment/reports/jasperserver/generate
+  Name: cfp.generateFromJasperServer
+
+Frontend:
+---------
+- resources/js/pages/main-modules/cfp/dialog/generate-cfp-btn.jsx (NEW)
+  Button component with FileText icon
+  Opens PDF in new window
+
+- resources/js/pages/main-modules/cfp/index.jsx
+  Added GenerateCfpButton import
+  Passed onCreateAction prop to table
+
+- resources/js/pages/main-modules/cfp/cfp-server-side-data-table.jsx
+  Added onCreateAction prop handling
+
+- resources/js/pages/main-modules/cfp/cfp-data-table-controls.jsx
+  Renders the button in controls section
+
+
+================================================================================
+Configuration
+================================================================================
+
+.env file needs these variables:
+
+JRS_BASE_URL=http://your-jasperserver:8080/jasperserver
+JRS_USERNAME=your_username
+JRS_PASSWORD=your_password
+JRS_ORG_ID=null
+
+Config is in config/jasper-report-client.php
+
+JasperServer Requirements:
+- Must be running and accessible from app server
+- Report path: /Document_report/CFP
+- User needs read permissions on the report
+
+
+================================================================================
+How It Works
+================================================================================
+
+1. User clicks "Generate CFP" button on the CFP page
+2. Frontend opens route('cfp.generateFromJasperServer') in new tab
+3. Backend controller builds JasperServer REST API URL:
+   {baseUrl}/rest_v2/reports/Document_report/CFP.pdf
+4. Makes HTTP request with Basic Auth
+5. Returns PDF response with Content-Disposition: inline
+6. Browser displays PDF
+
+Error handling logs to 'cfp' channel if anything fails.
+
+
+================================================================================
+After Deployment - IMPORTANT!
+================================================================================
+
+Run these commands or Ziggy won't see the new route:
+
+php artisan route:clear
+php artisan route:cache
+php artisan optimize
+npm run build
+
+To verify route is registered:
+php artisan route:list --name=cfp
+
+
+================================================================================
+Testing
+================================================================================
+
+1. Check JasperServer is accessible at configured URL
+2. Navigate to /certificate-of-full-payment
+3. Click "Generate CFP" button
+4. PDF should open in new tab
+
+If it doesn't work, check storage/logs/laravel.log for errors.
+
+
+================================================================================
+Adding Parameters (if needed later)
+================================================================================
+
+Currently $params = [] in the controller.
+
+To add dynamic parameters, update generateFromJasperServer():
+
+$params = [
+    'loan_number' => $request->input('loan_number'),
+    'customer_name' => $request->input('customer_name'),
+    // etc.
+];
+
+Frontend side, append query params before opening:
+
+const params = new URLSearchParams({
+    loan_number: 'value',
+    customer_name: 'value'
+});
+const url = route('cfp.generateFromJasperServer') + '?' + params.toString();
+window.open(url, '_blank');
+
+
+================================================================================
+Common Issues
+================================================================================
+
+"Ziggy error: route not found"
+→ Run: php artisan route:clear && php artisan route:cache
+
+"Failed to generate report"
+→ Check JasperServer is running
+→ Verify .env credentials
+→ Confirm report exists at /Document_report/CFP
+
+"Connection timeout"
+→ Timeout is set to 60 seconds in controller
+→ Check network/firewall
+
+"PDF doesn't open"
+→ Check popup blocker
+→ Check browser console for errors
+
+================================================================================
+Notes
+================================================================================
+
+- Keep credentials in .env only, never commit them
+- Could add permission middleware later if needed
+- Parameters array is empty for now, can add filtering later
+- Might want to add a loading spinner while report generates
+- Consider caching if reports get slow
+
+================================================================================

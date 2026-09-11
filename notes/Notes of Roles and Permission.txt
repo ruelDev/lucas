@@ -1,0 +1,205 @@
+Spatie Laravel Permission
+
+--------------TO INSTALL AND SETUP-------------------------------------
+ composer require spatie/laravel-permission
+ php artisan vendor:publish --provider="Spatie\Permission\PermissionServiceProvider"
+
+
+----------------(for checking)---------------------------------------
+---------------Additional Setup on Database-----------------------------
+add this on cache
+key = bank_of_makati_cache_spatie.permission.cache
+value = a:3:{s:5:"alias";a:4:{s:1:"a";s:2:"id";s:1:"b";s:4:"name";s:1:"c";s:10:"guard_name";s:1:"r";s:5:"roles";}s:11:"permissions";a:28:{i:0;a:4:{s:1:"a";i:1;s:1:"b";s:20:"user_management.view";s:1:"c";s:3:"web";s:1:"r";a:1:{i:0;i:1;}}i:1;a:4:{s:1:"a";i:2;s:1:"b";s:20:"user_management.edit";s:1:"c";s:3:"web";s:1:"r";a:1:{i:0;i:1;}}i:2;a:4:{s:1:"a";i:3;s:1:"b";s:22:"user_management.create";s:1:"c";s:3:"web";s:1:"r";a:1:{i:0;i:1;}}i:3;a:4:{s:1:"a";i:4;s:1:"b";s:22:"user_management.delete";s:1:"c";s:3:"web";s:1:"r";a:1:{i:0;i:1;}}i:4;a:4:{s:1:"a";i:5;s:1:"b";s:20:"role_management.view";s:1:"c";s:3:"web";s:1:"r";a:1:{i:0;i:1;}}i:5;a:4:{s:1:"a";i:6;s:1:"b";s:20:"role_management.edit";s:1:"c";s:3:"web";s:1:"r";a:1:{i:0;i:1;}}i:6;a:4:{s:1:"a";i:7;s:1:"b";s:22:"role_management.create";s:1:"c";s:3:"web";s:1:"r";a:1:{i:0;i:1;}}i:7;a:4:{s:1:"a";i:8;s:1:"b";s:22:"role_management.delete";s:1:"c";s:3:"web";s:1:"r";a:1:{i:0;i:1;}}i:8;a:4:{s:1:"a";i:9;s:1:"b";s:22:"branch_management.view";s:1:"c";s:3:"web";s:1:"r";a:1:{i:0;i:1;}}i:9;a:4:{s:1:"a";i:10;s:1:"b";s:22:"branch_management.edit";s:1:"c";s:3:"web";s:1:"r";a:1:{i:0;i:1;}}i:10;a:4:{s:1:"a";i:11;s:1:"b";s:24:"branch_management.create";s:1:"c";s:3:"web";s:1:"r";a:1:{i:0;i:1;}}i:11;a:4:{s:1:"a";i:12;s:1:"b";s:24:"branch_management.delete";s:1:"c";s:3:"web";s:1:"r";a:1:{i:0;i:1;}}i:12;a:4:{s:1:"a";i:13;s:1:"b";s:21:"group_management.view";s:1:"c";s:3:"web";s:1:"r";a:1:{i:0;i:1;}}i:13;a:4:{s:1:"a";i:14;s:1:"b";s:21:"group_management.edit";s:1:"c";s:3:"web";s:1:"r";a:1:{i:0;i:1;}}i:14;a:4:{s:1:"a";i:15;s:1:"b";s:23:"group_management.create";s:1:"c";s:3:"web";s:1:"r";a:1:{i:0;i:1;}}i:15;a:4:{s:1:"a";i:16;s:1:"b";s:23:"group_management.delete";s:1:"c";s:3:"web";s:1:"r";a:1:{i:0;i:1;}}i:16;a:4:{s:1:"a";i:17;s:1:"b";s:24:"division_management.view";s:1:"c";s:3:"web";s:1:"r";a:1:{i:0;i:1;}}i:17;a:4:{s:1:"a";i:18;s:1:"b";s:24:"division_management.edit";s:1:"c";s:3:"web";s:1:"r";a:1:{i:0;i:1;}}i:18;a:4:{s:1:"a";i:19;s:1:"b";s:26:"division_management.create";s:1:"c";s:3:"web";s:1:"r";a:1:{i:0;i:1;}}i:19;a:4:{s:1:"a";i:20;s:1:"b";s:26:"division_management.delete";s:1:"c";s:3:"web";s:1:"r";a:1:{i:0;i:1;}}i:20;a:4:{s:1:"a";i:21;s:1:"b";s:26:"department_management.view";s:1:"c";s:3:"web";s:1:"r";a:1:{i:0;i:1;}}i:21;a:4:{s:1:"a";i:22;s:1:"b";s:26:"department_management.edit";s:1:"c";s:3:"web";s:1:"r";a:1:{i:0;i:1;}}i:22;a:4:{s:1:"a";i:23;s:1:"b";s:28:"department_management.create";s:1:"c";s:3:"web";s:1:"r";a:1:{i:0;i:1;}}i:23;a:4:{s:1:"a";i:24;s:1:"b";s:28:"department_management.delete";s:1:"c";s:3:"web";s:1:"r";a:1:{i:0;i:1;}}i:24;a:4:{s:1:"a";i:25;s:1:"b";s:23:"section_management.view";s:1:"c";s:3:"web";s:1:"r";a:1:{i:0;i:1;}}i:25;a:4:{s:1:"a";i:26;s:1:"b";s:23:"section_management.edit";s:1:"c";s:3:"web";s:1:"r";a:1:{i:0;i:1;}}i:26;a:4:{s:1:"a";i:27;s:1:"b";s:25:"section_management.create";s:1:"c";s:3:"web";s:1:"r";a:1:{i:0;i:1;}}i:27;a:4:{s:1:"a";i:28;s:1:"b";s:25:"section_management.delete";s:1:"c";s:3:"web";s:1:"r";a:1:{i:0;i:1;}}}s:5:"roles";a:1:{i:0;a:3:{s:1:"a";i:1;s:1:"b";s:5:"Admin";s:1:"c";s:3:"web";}}}
+expiration = 1749181445
+
+
+-------------ONCE THE VENDOR PUBLISH IS DONE, THERE WILL BE AN ADDITIONAL MIGRATION NEEDED TO MIGRATE----------------------
+php artisan migrate
+
+
+-------------CREATE PERMISSIONS VIA DB SEEDER----------------------------
+create initial seeder for permissions
+php artisan make:seeder PermissionsSeeder
+
+public function run(): void
+    {
+        $permissions = [
+            "users.view",
+            "users.edit",
+            "users.create",
+            "users.delete",
+            "roles.view",
+            "roles.edit",
+            "roles.create",
+            "roles.delete",
+        ];
+
+        foreach ($permissions as $key => $value)
+        {
+           Permission::create(["name" => $value]);
+        }
+    }
+
+
+php artisan db:seed PermissionSeeder
+
+-----------------------------ROLES MANAGEMENT WITH PERMISSIONS-----------------------------
+do CRUD for Roles with preset permissions
+
+refer to
+    Controller: RoleController
+    Roles/Create.tsx
+    Roles/Edit.tsx
+    Roles/Delete.tsx
+
+------------------------------ATTACHING ROLES TO THE USERS------------------------------------
+After CRUD, proceed to updating User by adding role selection
+
+on user.php model, add this
+use Spatie\Permission\Traits\HasRoles;
+
+
+-----------------------------------ADD PERMISSIONS DATA TO THE SESSION DATA IN CLIENT-----------------
+Update auth in HandleInertiaRequests.php
+            'auth' => [
+                'user' => $request->user(),
+                'permissions' => fn () => $request->user()?->getAllPermissions()->pluck("name") ?? [],
+            ],
+
+
+----------------------CUSTOM FUNCTION FOR CHECKING PERMISSIONS-------------------------
+create file can.ts on resources/js/lib
+
+
+-----------------(INITIAL FILE)--------------------------------
+import { usePage } from "@inertiajs/react";
+
+export function can(permission: string): boolean {
+    const { auth } = usePage().props as {
+        auth: {
+            permissions: string[]
+        };
+    };
+
+    return auth.permissions.includes(permission);
+}
+
+export function canAny(permissions: string[]): boolean {
+    const { auth } = usePage().props as {
+        auth: {
+            permissions: string[];
+        };
+    };
+
+    return permissions.some(permission => auth.permissions.includes(permission));
+}
+
+
+---------------(UPDATED can.tsx)-----------------------------
+import { usePage } from "@inertiajs/react";
+
+interface AuthProps {
+    auth: {
+        permissions? : string[];
+        roles? : string[];
+    };
+}
+
+export function can(permission: string): boolean {
+    const { auth } = usePage().props as AuthProps;
+    return (auth.permissions ?? []).includes(permission);
+}
+
+export function canAny(permissions: string[]): boolean {
+    const { auth } = usePage().props as AuthProps;
+    const userPermissions = auth.permissions ?? [];
+    return permissions.some(permission => userPermissions.includes(permission));
+}
+
+export function hasRole(role: string): boolean {
+    const { auth } = usePage().props as AuthProps;
+    return (auth.roles ?? []).includes(role);
+}
+
+export function hasAnyRole(roles: string[]): boolean {
+    const { auth } = usePage().props as AuthProps;
+    const userRoles = auth.roles ?? [];
+    return roles.some(role => userRoles.includes(role));
+}
+
+
+------------------------ATTACHING THE PERMISSION CHECKER (FROM CAN.TSX) BEFORE DISPLAYING AN ELEMENT--------------------------------
+add import to the jsx file
+import { can } from '@/lib/can';
+
+then you may now attach {can() &&} to the jsx
+
+    permission checking before displaying the Button
+
+            {can('branch_management.create') && (
+                <DialogTrigger asChild>
+                    <Button className="h-8 bg-gradient-to-r from-blue-900 to-blue-800 px-4 py-2 text-white transition duration-300 hover:from-blue-950 hover:to-blue-900">
+                        <Building className="h-4 w-4" />
+                        Create Branch
+                    </Button>
+                </DialogTrigger>
+            )}
+
+
+----------------------PERMISSIONS CHECKING BEFORE ACCESSING THE ROUTES----------------------------------------------
+add this to the middleware on bootstrap/app.php
+
+        $middleware->alias([
+            'role' => \Spatie\Permission\Middleware\RoleMiddleware::class,
+            'permission' => \Spatie\Permission\Middleware\PermissionMiddleware::class,
+            'role_or_permission' => \Spatie\Permission\Middleware\RoleOrPermissionMiddleware::class,
+        ]);
+
+then you can update the routes in the web.php
+    Route::resource('roles', RoleController::class)
+        ->only(["create", "store"])
+        ->middleware("permission:roles.create");
+
+    Route::resource('roles', RoleController::class)
+        ->only(["edit", "update"])
+        ->middleware("permission:roles.edit");
+
+    Route::resource('roles', RoleController::class)
+        ->only(["destroy"])
+        ->middleware("permission:roles.delete");
+
+    Route::resource('roles', RoleController::class)
+        ->only(["index", "show"])
+        ->middleware("permission:roles.view|roles.create|roles.edit|roles.delete");
+
+------------------------ADDITIONAL: PERMISSIONS CHECKING ON FUNCTIONS ON CONTROLLER---------------------------------------
+Inside the function in controller file,
+
+example:
+$isAuthorize = $user->can('out_collection.authorize');
+
+
+------------------------ADDITIONAL: PERMISSIONS CHECKING BEFORE DISPLAYING MENU ITEMS IN SIDEBAR---------------------------------------
+Additional, for the sidebar or navbar, you can do this so that only links with allowed permissions are displayed
+
+in app-sidebar.tsx
+import { canAny } from '@/lib/can';
+
+export function AppSidebar() {
+    const mainNavItems: NavItem[] = [
+        {
+            title: 'Dashboard',
+            href: '/dashboard',
+            icon: LayoutGrid,
+        },
+        ...(
+            canAny(['users.view', 'users.edit', 'users.create', 'users.delete'])
+                ? [{ title: 'Users', href: '/users', icon: Users }]
+                : []
+        ),
+        ...(
+            canAny(['roles.view', 'roles.edit', 'roles.create', 'roles.delete'])
+                ? [{ title: 'Roles', href: '/roles', icon: UserCog }]
+                : []
+        ),
+    ];

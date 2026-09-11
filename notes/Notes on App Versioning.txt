@@ -1,0 +1,102 @@
+========================================================================================
+                            Notes for app Versioning
+========================================================================================
+
+========================================================================================
+1. Create a seeder class
+========================================================================================
+
+Note: Make sure that you indicate the '/versions/' directory before storing the seeder class
+
+Naming Convention: 
+    vX_X_X_Seeder 
+    
+    (Replaced dot with underscore as it triggers error during db:seed)
+
+example:
+    php artisan make:seeder versions/v1_0_1_Seeder
+
+========================================================================================
+2. Input the necessary details for app version and its release notes
+========================================================================================
+
+    For reference this is the table to be inputted:
+        AppVersion = {
+            version = (string) = x.x.x <Major Update>.<Minor Update>.<Patch Update>
+            release_type = (ENUM) = ['MAJOR', 'MINOR' , 'PATCH']
+        }
+
+        ReleaseNotes = {
+            category = (string) = [Keywords or category related to the Note] ['Added', 'Fixed', 'Changed', 'Improved', 'Removed', 'Deprecated', 'Security', 'Performance']
+            title = (string) = [Title of the Release Note]
+            description = (string) = [Description of the Release Note]
+            sort_order = (interger) = [Decide on the number for the arrangement of release notes]
+        }
+
+    Example Template for the Seeder Class
+
+        <?php
+
+        namespace Database\Seeders\versions;
+
+        use App\Models\AppVersion;
+        use Carbon\Carbon;
+        use Illuminate\Database\Seeder;
+
+        class v1_0_1_Seeder extends Seeder
+        {
+            /**
+            * Run the database seeds.
+            */
+            public function run(): void
+            {
+                $version = AppVersion::firstOrCreate([
+                    'version' => '1.2.0',
+                    'release_type' => 'MAJOR',
+                    'released_at' => Carbon::now(),
+                ]);
+
+                $releaseNotes = [
+                    [
+                        'category' => 'Fixed Component',
+                        'title' => 'Receipt Converter',
+                        'description' => 'Restructured internal components to lighten the load of the front end for Receipt Converter.',
+                        'sort_order' => 1,
+                    ],
+                    [
+                        'category' => 'New Implementation',
+                        'title' => 'Redis for Session Caching',
+                        'description' => 'Migrated Sessiong handling from Database Session handling into Cache handling to reduce load time.',
+                        'sort_order' => 2,
+                    ],
+                    [
+                        'category' => 'Improvement',
+                        'title' => 'Multiple Session improved',
+                        'description' => 'Adapted Hybrid Multiple Session Checking via Database users active session version and Cache store for last user activity.',
+                        'sort_order' => 3,
+                    ],
+                    [
+                        'category' => 'Addition',
+                        'title' => 'New Permissions Added',
+                        'description' => 'New Permissions added for improved Role based access for Receipt converter.',
+                        'sort_order' => 4,
+                    ],
+                ];
+
+                foreach ($releaseNotes as $note) {
+                    $version->releaseNotes()->create($note);
+                }
+            }
+        }
+
+========================================================================================
+3. Run the Seeder Class
+========================================================================================
+
+    Run the following artisan command:
+
+        php artisan db:seed --class="Database\Seeders\versions\<seeder class>"
+
+    ex. 
+        
+        php artisan db:seed --class="Database\Seeders\versions\v1_0_1_Seeder"
