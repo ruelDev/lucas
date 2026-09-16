@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import AppLayout from '@/layouts/app-layout';
 import { Head } from '@inertiajs/react';
-import CertificateOfFullPaymentCharts from './certificate-of-full-payment/certificate-of-full-payment-charts';
+// import CertificateOfFullPaymentCharts from './certificate-of-full-payment/certificate-of-full-payment-charts';
 import ReceiptConverterCharts from './receipt-converter/receipt-converter-charts';
 import RoleCharts from './role-management/role-charts';
 import UserCharts from './user-management/user-charts';
@@ -33,7 +33,8 @@ export default function Dashboard({ data }) {
                     'section_management.view'
                 ]) && <MasterSetupCharts data={data} />}
 
-                {can('certificate_fullpayment.view') && <CertificateOfFullPaymentCharts data={data} />}
+                {/* Temporarily disabled — backend data source (remote sqlsrv_bmilmsdb/sqlsrv_bfclmsdb) is unavailable right now. */}
+                {/* {can('certificate_fullpayment.view') && <CertificateOfFullPaymentCharts data={data} />} */}
 
                 {can('receipt_converter.view') && <ReceiptConverterCharts data={data} />}
             </div>

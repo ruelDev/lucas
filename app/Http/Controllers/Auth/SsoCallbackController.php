@@ -358,10 +358,17 @@ class SsoCallbackController extends Controller
     private function buildOrgAttributes(string $type, array $data): array
     {
         $attributes = [
-            'name'    => $data['name'] ?? null,
-            'status'  => $data['status'] ?? 'active',
-            'remarks' => $data['remarks'] ?? null,
+            'name'   => $data['name'] ?? null,
+            'status' => $data['status'] ?? 'active',
         ];
+
+        // DEALER has no remarks column in Lucas — neither app's dealer UI
+        // sets a meaningful value for it (unlike Branch/Group, where it's a
+        // real reason-for-deactivation field), so it's skipped here rather
+        // than added just to carry an always-null value.
+        if ($type !== 'DEALER') {
+            $attributes['remarks'] = $data['remarks'] ?? null;
+        }
 
         if (in_array($type, ['BRANCH', 'DEALER'])) {
             $attributes['location'] = $data['location'] ?? '';

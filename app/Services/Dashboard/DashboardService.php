@@ -34,7 +34,10 @@ class DashboardService
         $userData = $this->userCharts->prepareUserChartsData();
         $roleData = $this->roleCharts->prepareRoleChartsData();
         $masterSetupData = $this->masterSetupCharts->prepareMasterSetupChartsData();
-        $certificateOfFullPaymentData = $this->certificateOfFullPaymentCharts->prepareCertificateOfFullPaymentChartsData();
+        // Temporarily disabled — queries remote sqlsrv_bmilmsdb/sqlsrv_bfclmsdb connections
+        // that aren't reachable right now. Re-enable once those DBs are needed again.
+        // $certificateOfFullPaymentData = $this->certificateOfFullPaymentCharts->prepareCertificateOfFullPaymentChartsData();
+        $certificateOfFullPaymentData = null;
         $receiptConverterData = $this->receiptConverterCharts->prepareReceiptConverterChartsData();
 
 

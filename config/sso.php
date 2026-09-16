@@ -8,7 +8,7 @@ return [
     | The base URL of the SSO server. Used for webhook calls and the public-key
     | bootstrap command. Never fetched at request-time for token verification.
     */
-    'url' => env('SSO_URL', 'http://localhost:8001'),
+    'url' => env('SSO_URL', 'http://127.0.0.1:8000'),
 
     /*
     |--------------------------------------------------------------------------
